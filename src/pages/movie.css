@@ -1,0 +1,6 @@
+.movie-card {
+  border: none;
+}
+.movie-card img {
+  object-fit: cover !important;
+}
