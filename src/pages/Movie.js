@@ -1,12 +1,20 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { URL } from "../url";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./movie.css";
 
 const Movie = () => {
   const { title } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [movie, setMovie] = useState();
+  const [saved, setSaved] = useState(
+    JSON.parse(localStorage.getItem("save_item"))
+      ? JSON.parse(localStorage.getItem("save_item"))
+      : []
+  );
+  const [bookmarked, setBookMarked] = useState(false);
   const API = `${URL}${process.env.REACT_APP_API_KEY}`;
   const showMovie = async (url) => {
     try {
@@ -26,6 +34,7 @@ const Movie = () => {
     }, [500]);
     return () => clearTimeout(timeout);
   }, [API, title]);
+
   return (
     <div className="container mt-3">
       {isLoading ? (
@@ -113,13 +122,42 @@ const Movie = () => {
                 </span>
                 <span className="text-white fs-6">{movie.imdbRating}</span>
                 <span className="ms-3">
-                  <a href="#">
-                    <i
-                      class="fa-regular fa-bookmark"
-                      style={{ color: "#ffffff" }}
-                    ></i>
-                    {/* <i class="fa-solid fa-bookmark" style="color: #ebbb0f;"></i> */}
+                  <a
+                    href="#"
+                    onClick={() => {
+                      if (bookmarked === false) {
+                        setBookMarked(true);
+                        setSaved((prev) => [...prev, movie]);
+                        localStorage.setItem(
+                          "save_item",
+                          JSON.stringify([...saved, movie])
+                        );
+                      } else {
+                        setBookMarked(false);
+                      }
+                    }}
+                  >
+                    {bookmarked ? (
+                      <i
+                        class="fa-solid fa-bookmark"
+                        style={{ color: "#ebbb0f" }}
+                      ></i>
+                    ) : (
+                      <i
+                        class="fa-regular fa-bookmark"
+                        style={{ color: "#ffffff" }}
+                      ></i>
+                    )}
                   </a>
+                </span>
+                <span className="ms-3">
+                  <Link
+                    to="/"
+                    className="btn btn-sm btn-warning"
+                    style={{ fontSize: "0.7rem" }}
+                  >
+                    Back to Homepage
+                  </Link>
                 </span>
               </div>
             </div>

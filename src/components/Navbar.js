@@ -10,7 +10,7 @@ const Navbar = () => {
         className="navbar navbar-expand-lg navbar-dark"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.953)" }}
       >
-        <div className="container-fluid p-3">
+        <div className="container p-3">
           <Link className="navbar-brand text-warning fw-bold" to="/">
             MovieDB
           </Link>
@@ -29,7 +29,7 @@ const Navbar = () => {
             className="collapse navbar-collapse d-flex justify-content-center"
             id="navbarSupportedContent"
           >
-            <form className="d-flex w-50" role="search">
+            <form className="d-flex w-75" role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -54,6 +54,9 @@ const Navbar = () => {
               </button>
             </form>
           </div>
+          <Link className="navbar-brand text-warning fw-bold" to="/saved">
+            <i class="fa-solid fa-bookmark" style={{ color: "#ebbb0f" }}></i>
+          </Link>
         </div>
       </nav>
     </>

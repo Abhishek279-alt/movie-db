@@ -38,3 +38,11 @@
   color: white;
   font-size: 1.2rem;
 }
+
+#cross {
+  transition: all 0.2s ease;
+}
+#cross:hover {
+  color: gold !important;
+  transform: scale(1.1);
+}
